@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intern/semslist.dart';
 
 Future<void> showSemesterDialog({
   required BuildContext context,
   required String selectedSemester,
   required Function(String) onSelected,
 }) {
-  final semesters = [
-    "1st Semester",
-    "2nd Semester",
-    "3rd Semester",
-    "4th Semester",
-    "5th Semester",
-    "6th Semester",
-    "7th Semester",
-    "8th Semester",
-  ];
 
   return showDialog(
     context: context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intern/semesterdialog.dart';
+import 'package:intern/semesterdialog.dart'; // dialog file
+import 'package:intern/semslist.dart'; // semester list
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,7 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String _selectedSemester = "1st Semester"; // this is semester state
+  String _selectedSemester = "1st Semester"; // default selected semester
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,12 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
           PopupMenuButton(
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem(child: Text('About')),
-                PopupMenuItem(child: Text('Rate Us')),
-                PopupMenuItem(child: Text('Send Feedback')),
-                PopupMenuItem(child: Text('Terms of Service')),
-              ];
-            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(child: Text('About')),
+              PopupMenuItem(child: Text('Rate Us')),
+              PopupMenuItem(child: Text('Send Feedback')),
+              PopupMenuItem(child: Text('Terms of Service')),
+            ],
           ),
         ],
       ),
@@ -77,7 +76,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                const Text('Semester Subjects'),
+                Text('Semester Subjects ($_selectedSemester)'),
                 const Spacer(),
                 OutlinedButton(
                   onPressed: () {
@@ -100,6 +99,53 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
+            ),
+          ),
+
+          // Use Expanded to allow GridView inside Column
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: GridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: List.generate(semesters.length, (index) {
+                  final semester = semesters[index];
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedSemester = semester;
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Selected: $semester"),
+                          duration: Duration(milliseconds: 800),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: semester == _selectedSemester
+                          ? Colors.redAccent.shade100
+                          : Colors.blue.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          semester,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
             ),
           ),
         ],
