@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intern/recentnotice.dart';
 import 'package:intern/semesterdialog.dart';
+import 'package:intern/semesters.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -101,6 +103,10 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
+          ),
+          Recentnotice(),
+          Expanded(
+            child: Semesters(selectedSemester: _selectedSemester), // Passing the above selectedSemester
           ),
         ],
       ),

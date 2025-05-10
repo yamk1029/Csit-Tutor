@@ -25,8 +25,7 @@ Future<void> showSemesterDialog({
         ),
         title: const Text("Choose Semester", style: TextStyle(fontSize: 16),),
         content: SizedBox(
-          width: 250,
-          height: 300,
+          width: double.maxFinite,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: semesters.length,
