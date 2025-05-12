@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intern/recentnotice.dart';
 import 'package:intern/semesterdialog.dart';
+import 'package:intern/services/notice_service.dart';
+
 import 'package:intern/semesters.dart';
 
 class Home extends StatefulWidget {
